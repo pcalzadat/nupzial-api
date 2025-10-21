@@ -5,25 +5,9 @@ from pydantic import field_validator, model_validator
 class Settings(BaseSettings):
     RUNWAY_API_KEY: str
 
-    AZURE_TENANT_ID: str
-    AZURE_CLIENT_ID: str
-    AZURE_CLIENT_SECRET: str
-    AZURE_USER_EMAIL: str
-
-    SESSION_SECRET:str
-    REDIRECT_URI:str
-    FRONTEND_URL:str
-
-    WHATSAPP_TOKEN:str
-    WHATSAPP_PHONE_NUMBER_ID:int
-    GRAPH_API_VERSION:str
-    
-    # Microsoft Graph API scopes - will be parsed from space-separated string
-    GRAPH_SCOPES: str = "Mail.Send User.Read"
-
     CORS_ORIGINS: list[str] = Field(default_factory=lambda: ["http://localhost:5173"])
     TEMP_DIR: str = "temp_files"
-    GRAPH_BASE: str = "https://graph.microsoft.com/v1.0"
+
     STATIC_VIDEOS: str = "static/videos"
     STATIC_OVERLAY: str = "static/overlay/efectoluces-logo.mov"
     STATIC_AUDIO: str = "static/audio/audio.mp4"
