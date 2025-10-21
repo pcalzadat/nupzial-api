@@ -12,3 +12,5 @@ moviepy
 imageio-ffmpeg
 opencv-python-headless
 gunicorn
+pydantic
+pydantic-settings
