@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+msal
+azure-storage-blob
+httpx
+requests
+aiofiles
+python-multipart
+pillow
+moviepy
+imageio-ffmpeg
+opencv-python-headless
+gunicorn
