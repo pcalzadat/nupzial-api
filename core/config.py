@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     # Microsoft Graph API scopes - will be parsed from space-separated string
     GRAPH_SCOPES: str = "Mail.Send User.Read"
 
-    CORS_ORIGINS: list[str] = Field(default_factory=lambda: ["http://localhost:5173"])
+    CORS_ORIGINS: list[str] = Field(default_factory=lambda: ["http://localhost:5173", "https://nupzial-web.azurewebsites.net"])
     TEMP_DIR: str = "temp_files"
     GRAPH_BASE: str = "https://graph.microsoft.com/v1.0"
     STATIC_VIDEOS: str = "static/videos"
