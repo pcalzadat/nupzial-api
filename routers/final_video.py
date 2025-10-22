@@ -61,7 +61,7 @@ def send_power_automate(nombre1: str, nombre2: str, email1: str, email2: str, vi
         resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
         resp.raise_for_status()
         try:
-            return resp.json()
+            return {"status": "success", "video_path": video_uri}
         except ValueError:
             return resp.text
     except requests.RequestException as e:
