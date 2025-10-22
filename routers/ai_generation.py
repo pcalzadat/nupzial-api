@@ -1,4 +1,4 @@
-import os, base64, uuid
+import os, base64, uuid, httpx, tempfile, certifi, ssl
 import aiohttp
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends, Body
 from core.deps import get_runway_service
@@ -6,10 +6,14 @@ from services.runway_service import RunwayService
 from utils.files import save_uploaded_file, get_media_url, get_placeholder
 from utils.images import compress_image
 from schemas.generation import CartelRequest, ParejaVidRequest
-from utils.blob_storage import upload_bytes_to_blob_storage
+from utils.blob_storage import upload_bytes_to_blob_storage, upload_to_blob_storage
 from azure.storage.blob import ContentSettings  # Add this import at the top
+import logging
 
+logger = logging.getLogger("video_generation_app")
 router = APIRouter(prefix="/api")
+
+ssl_ctx = ssl.create_default_context(cafile=certifi.where())
 
 '''@router.post("/create_cartel")
 async def create_cartel(req: CartelRequest, runway: RunwayService = Depends(get_runway_service)):
@@ -54,25 +58,70 @@ async def create_cartel_video(
     runway: RunwayService = Depends(get_runway_service),
 ):
     print("isDemo:", data.demo)
+    logger.info(f'isDemo: {data.demo}')
 
     if data.demo:
         vid_url = "https://showroomblob.blob.core.windows.net/demo-data/cartel_vid_demo.mp4"
+        logger.info(f'Demo vid url: {vid_url}')
     else:
         image_url = data.image_url
-        print("Image URL for cartel video generation:", image_url)
+        logger.info("Image URL for cartel video generation:", image_url)
         vid_url = runway.create_cartel_video(image_url)
+        logger.info(f'Runway vid url: {vid_url}')
 
-    print("Generating cartel video for:", data.nombre1, data.nombre2, "Demo:", data.demo)
+    logger.info("Generating cartel video for:", data.nombre1, data.nombre2, "Demo:", data.demo)
+    filename = f'vid_cartel_{data.id}'
 
-    # Download video from Runway
+    out_path = os.path.join(tempfile.gettempdir(), filename)
+
+    '''# Download video from Runway
     async with aiohttp.ClientSession() as session:
         async with session.get(vid_url) as response:
             if response.status != 200:
                 raise HTTPException(status_code=400, detail="Error downloading video from Runway")
             video_content = await response.read()
+'''
+    
+    try:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(600.0), follow_redirects=True, headers={
+            "User-Agent": "efor-appservice/1.0",
+            "Accept": "*/*",
+        }, verify=ssl_ctx) as client:
+            logger.info("Cliente httpx creado correctamente")
+            async with client.stream("GET", vid_url) as resp:
+                logger.info(f"Respuesta recibida: HTTP {resp.status_code} de {resp.url}")
+                if resp.status_code != 200:
+                    snippet = (await resp.aread())[:1024]
+                    logger.error(f"Error HTTP {resp.status_code}. Cuerpo parcial: {snippet!r}")
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"Runway download failed (HTTP {resp.status_code}). "
+                               f"URL final: {str(resp.url)} Body: {snippet!r}"
+                    )
+                with open(out_path, "wb") as f:
+                    logger.info("Comenzando escritura del archivo en disco...")
+                    total_bytes = 0
+                    async for chunk in resp.aiter_bytes(1024 * 64):
+                        if chunk:
+                            f.write(chunk)
+                            total_bytes += len(chunk)
+                    logger.info(f"Descarga completada. Bytes escritos: {total_bytes}")
 
-    filename = f'vid_cartel_{data.id}'
+        file_id, public_url = upload_to_blob_storage(
+            file_path=out_path,
+            filename=filename,
+            content_type=ContentSettings(content_type='video/mp4'),
+            folder=data.id  # Optional: organize files in folders
+        )
 
+        return {
+            "status": "success",
+            "video_url": public_url
+        }
+        #return out_path
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Error downloading video from Runway: {e}")
+    '''
     # Upload to blob storage
     file_id, public_url = upload_bytes_to_blob_storage(
         folder=data.id,
@@ -87,7 +136,7 @@ async def create_cartel_video(
         "status": "success",
         "video_url": public_url
     }
-
+    '''
     '''
     try:
         image_url = data.url
@@ -188,7 +237,7 @@ async def create_video_pareja(
     else:
         image_url = data.image_url
         print("Image URL for cartel video generation:", image_url)
-        vid_url = runway.create_video_pareja(image_url)
+        #vid_url = runway.create_video_pareja(image_url)
 
     print("Generating pareja video for:", data.id, data.demo)
 

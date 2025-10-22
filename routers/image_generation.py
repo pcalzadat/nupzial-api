@@ -130,26 +130,35 @@ async def edit_cartel_image(data: EditCartelRequest):
     out_name = f"img_cartel_{data.id}.jpg"
     out_path = os.path.join(tempfile.gettempdir(), out_name)
 
-    # Llamada a la función de render
-    names = f"{data.nombre1} y {data.nombre2}"
-    fecha = f"{data.fecha}"
+    try:
+        # Llamada a la función de render
+        names = f"{data.nombre1} y {data.nombre2}"
+        fecha = f"{data.fecha}"
 
-    sum_chars = len(data.nombre1) + len(data.nombre2)
+        sum_chars = len(data.nombre1) + len(data.nombre2)
 
-    if sum_chars > 10:
-        render_save_the_date(input_image=input_img, output_image=out_path, names=names, date_str=fecha)
-    else:
-        render_save_the_date(input_image=input_img, output_image=out_path, names=names, date_str=fecha, vertical_shift=-74, line_spacing_top=1, line_spacing_main=38, l2_size=102)
+        if sum_chars > 10:
+            render_save_the_date(input_image=input_img, output_image=out_path, names=names, date_str=fecha)
+        else:
+            render_save_the_date(input_image=input_img, output_image=out_path, names=names, date_str=fecha, vertical_shift=-74, line_spacing_top=1, line_spacing_main=38, l2_size=102)
 
-    # Upload to Blob
-    file_id, public_url = upload_to_blob_storage(
-        file_path=out_path,
-        filename=f'img_cartel_{data.id}',
-        content_type="image/jpeg",
-        folder=data.id  # Optional: organize files in folders
-    )
+        # Upload to Blob
+        file_id, public_url = upload_to_blob_storage(
+            file_path=out_path,
+            filename=f'img_cartel_{data.id}',
+            content_type="image/jpeg",
+            folder=data.id  # Optional: organize files in folders
+        )
 
-    return {
-        "image_id": file_id,
-        "image_url": public_url
-    }
+        return {
+            "image_id": file_id,
+            "image_url": public_url
+        }
+    finally:
+        # Limpieza explícita
+        try:
+            if os.path.exists(out_path):
+                os.remove(out_path)
+        except Exception:
+            # Opcional: loggear, pero no bloquear la respuesta
+            pass

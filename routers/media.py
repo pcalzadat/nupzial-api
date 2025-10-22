@@ -5,7 +5,9 @@ from fastapi.responses import FileResponse
 from typing import Tuple
 import requests
 from utils.blob_storage import upload_bytes_to_blob_storage
+import logging
 
+logger = logging.getLogger("video_generation_app")
 router = APIRouter(prefix="/api")
 
 '''@router.get("/media/{file_path:path}")
@@ -31,6 +33,8 @@ async def save_image(file: UploadFile = File(...)):
     """
     unique_id = str(uuid.uuid4().hex) #id único para el archivo y nombre de la carpeta
     filename = f'img_pareja_{unique_id}'
+
+    logger.info(f"Saving image: {unique_id}")
 
     # Validar tipo de archivo
     allowed_types = {"image/png", "image/jpeg", "image/jpg", "image/webp"}
