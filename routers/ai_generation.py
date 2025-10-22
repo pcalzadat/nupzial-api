@@ -237,6 +237,7 @@ async def create_video_pareja(
     else:
         image_url = data.image_url
         print("Image URL for cartel video generation:", image_url)
+        vid_url = "https://dnznrvs05pmza.cloudfront.net/879a7cb1-627b-4644-ac96-2404a6b91ea0.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzQyZGNjOTFmMmExZjdlYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc2MTI2NDAwMH0.wqkPAROtHxRkwhjhHsJmgJZccuptxkW-lz8PNpo4-Ro"
         #vid_url = runway.create_video_pareja(image_url)
 
     print("Generating pareja video for:", data.id, data.demo)
