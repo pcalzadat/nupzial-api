@@ -1,5 +1,8 @@
 import base64, requests
 from runwayml import RunwayML
+import logging
+
+logger = logging.getLogger("video_generation_app")
 
 class RunwayService:
     def __init__(self, client: RunwayML):
@@ -30,7 +33,9 @@ class RunwayService:
 
     def create_cartel_video(self, image_url: str) -> bytes:
         print("URL recibida en service:", image_url )
+        logger.info(f'URL recibida en service: %s {image_url}')
         #data_uri = self.bytes_to_data_uri(image_url, "image/png")
         prompt_vid = ('At the venue entrance, a wedding welcome sign stands adorned with flowers and satin ribbons that gently sway in the breeze; petals and confetti quiver faintly. The camera performs a subtle, steady push-in with a soft zoom, introducing mild parallax and natural micro-movement. Ambient elements flutter: fairy lights flicker, dust motes drift in warm daylight. Cinematic live-action, elegant and romantic, golden hour glow, shallow depth of field with creamy bokeh, crisp yet delicate textures, tasteful filmic contrast, 24fps.')
-        vid_url = self.image_to_video(image_url, prompt_vid, ratio="1280:720")
+        #vid_url = self.image_to_video(image_url, prompt_vid, ratio="1280:720")
+        vid_url = 'https://dnznrvs05pmza.cloudfront.net/154c4ee8-cdd4-4a55-81fe-ebcb7dbe9788.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDA3ZDQxYmU2MWEyMDMwYyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc2MTI2NDAwMH0.h80Id3L0imu7HlgZzUgv-oVLaJ8r6QYWi-z2UPY-6f8'
         return vid_url
