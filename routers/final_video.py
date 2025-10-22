@@ -61,6 +61,7 @@ def send_power_automate(nombre1: str, nombre2: str, email1: str, email2: str, vi
         resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
         resp.raise_for_status()
         try:
+            logger.info("Power Automate API call successful")
             return {"status": "success", "video_path": video_uri}
         except ValueError:
             return resp.text
@@ -92,7 +93,8 @@ async def generate_final_video(req: VideoFinalRequest, vs: VideoService = Depend
         out = vs.compose_final(req.id, cartel_local, pareja_local)
 
         send_power_automate(nombre1=req.nombre1, nombre2=req.nombre2, email1=req.email1, email2=req.email2, video_uri=out)
-
+        logger.info(f'Video final generado en: {out}')
+        
         # Devolver ruta y URL pública (get_media_url debe aceptar path absoluto o convertir)
         return {"status": "success", "video_path": out}
     finally:
