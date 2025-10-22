@@ -18,6 +18,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
 
       - name: Set up Python version
         uses: actions/setup-python@v5
@@ -62,3 +65,4 @@ jobs:
           slot-name: 'Production'
 
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7DBF119B66DE4D29A05F4D75077EAB16 }}
+
