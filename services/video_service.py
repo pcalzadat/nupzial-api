@@ -61,12 +61,16 @@ class VideoService:
         logger.info(f'Usando videos fijos: %s {v1}, %s {v2}, %s {v3}')
 
         if not (os.path.exists(v1) and os.path.exists(v2)):
+            logger.info(f'No se ha encontrado algun vídeo fijo')
             raise FileNotFoundError("Uno o más videos fijos no se encontraron")
 
         clips = []
         try:
+            logger.info(f'EMPEZAMOS!!')
             clip1 = VideoFileClip(v1);      
             clips.append(clip1)
+
+            logger.info(f'cpli1 ok')
 
             start_time_cartel = 0.5
             duration_cartel = 1.32 
@@ -75,8 +79,13 @@ class VideoService:
             subclip_cartel = clip_cartel.subclipped(start_time_cartel, end_time_cartel)   
             clips.append(subclip_cartel)
 
+            logger.info(f'cpli cartel ok')
+
+
             clip2 = VideoFileClip(v2);                
             clips.append(clip2)
+
+            logger.info(f'cpli2 ok')
 
             #Clip pareja
             start_time_pareja = 0.5
@@ -86,8 +95,14 @@ class VideoService:
             subclip_pareja = clip_pareja.subclipped(start_time_pareja, end_time_pareja)   
             clips.append(subclip_pareja)
 
+            logger.info(f'cpli pareja ok')
+
+
             clip3 = VideoFileClip(v3); 
             clips.append(clip3)
+
+            logger.info(f'clip3  ok')
+
 
             '''clip_polaroid = self._subclip(VideoFileClip(self._local(polaroid)), 2); 
             clips.append(clip_polaroid)
@@ -103,7 +118,12 @@ class VideoService:
 
             min_h = min(int(c.h) for c in clips)
             resized = [c.resized(height=min_h) for c in clips]
+
+            logger.info(f'llamo a concatenate_videoclips')
+
             final_clip = concatenate_videoclips(resized, method="compose")
+
+            logger.info(f'tenemos final_clip')
             
             # Efectos overlay
             if os.path.exists(self.overlay_path):
@@ -113,14 +133,16 @@ class VideoService:
                 final_clip = self._compose_screen(final_clip, overlay)
                 overlay.close()
 
+            logger.info(f'efectos ok')
             # Audio
             if os.path.exists(self.audio_path):
                 audio = AudioFileClip(self.audio_path).subclipped(0, final_clip.duration)
                 final_clip = final_clip.with_audio(audio)
-            
+            logger.info(f'audio ok')
 
             # Escribir a archivo temporal, leer bytes y subir a Blob Storage
             tmp_out = os.path.join(self.temp_dir, f"{uuid.uuid4().hex}.mp4")
+            logger.info(f'guardo en temp')
             audio_tmp = os.path.join(self.temp_dir, f"temp-audio-{uuid.uuid4()}.m4a")
             final_clip.write_videofile(
                 tmp_out,
@@ -130,6 +152,7 @@ class VideoService:
                 remove_temp=True,
                 fps=24
             )
+            logger.info(f'temp ok')
 
             # Leer bytes del archivo generado
             with open(tmp_out, "rb") as f:

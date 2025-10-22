@@ -13,13 +13,12 @@ class RunwayService:
     def image_to_video(self, data_uri: str, prompt: str, ratio: str = "1280:720", **opts) -> bytes:
         print("Enviando imagen y prompt a Runway:", prompt)
         try:
-            '''logger.info("Antes de crear tarea de video")
+            logger.info("Antes de crear tarea de video")
             task = self.client.image_to_video.create(model="gen4_turbo", prompt_image=data_uri, prompt_text=prompt, ratio=ratio, duration=5, **opts)
             logger.info("Tarea de video creada, esperando resultado")
             result = task.wait_for_task_output()
             logger.info(f'Resultado recibido de Runway: {result}')
-            video_url = result.output[0]'''
-            video_url = 'https://dnznrvs05pmza.cloudfront.net/154c4ee8-cdd4-4a55-81fe-ebcb7dbe9788.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDA3ZDQxYmU2MWEyMDMwYyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc2MTI2NDAwMH0.h80Id3L0imu7HlgZzUgv-oVLaJ8r6QYWi-z2UPY-6f8'
+            video_url = result.output[0]
             return video_url
         except Exception as e:
             print("Error en image_to_video:", repr(e))
