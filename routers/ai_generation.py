@@ -92,7 +92,7 @@ async def create_cartel_video(
                 logger.info(f"Respuesta recibida: HTTP {resp.status_code} de {resp.url}")
                 if resp.status_code != 200:
                     snippet = (await resp.aread())[:1024]
-                    logger.error(f"Error HTTP {resp.status_code}. Cuerpo parcial: {snippet!r}")
+                    logger.error(f'Error HTTP {resp.status_code}. Cuerpo parcial: {snippet!r}')
                     raise HTTPException(
                         status_code=400,
                         detail=f"Runway download failed (HTTP {resp.status_code}). "
@@ -105,7 +105,7 @@ async def create_cartel_video(
                         if chunk:
                             f.write(chunk)
                             total_bytes += len(chunk)
-                    logger.info(f"Descarga completada. Bytes escritos: {total_bytes}")
+                    logger.info(f'Descarga completada. Bytes escritos: {total_bytes}')
 
         file_id, public_url = upload_to_blob_storage(
             file_path=out_path,
@@ -237,8 +237,8 @@ async def create_video_pareja(
     else:
         image_url = data.image_url
         print("Image URL for cartel video generation:", image_url)
-        vid_url = "https://dnznrvs05pmza.cloudfront.net/879a7cb1-627b-4644-ac96-2404a6b91ea0.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzQyZGNjOTFmMmExZjdlYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc2MTI2NDAwMH0.wqkPAROtHxRkwhjhHsJmgJZccuptxkW-lz8PNpo4-Ro"
-        #vid_url = runway.create_video_pareja(image_url)
+        #vid_url = "https://dnznrvs05pmza.cloudfront.net/879a7cb1-627b-4644-ac96-2404a6b91ea0.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzQyZGNjOTFmMmExZjdlYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc2MTI2NDAwMH0.wqkPAROtHxRkwhjhHsJmgJZccuptxkW-lz8PNpo4-Ro"
+        vid_url = runway.create_video_pareja(image_url)
 
     print("Generating pareja video for:", data.id, data.demo)
 
