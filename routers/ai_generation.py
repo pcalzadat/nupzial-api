@@ -65,11 +65,11 @@ async def create_cartel_video(
         logger.info(f'Demo vid url: {vid_url}')
     else:
         image_url = data.image_url
-        logger.info("Image URL for cartel video generation:", image_url)
+        logger.info(f'Image URL for cartel video generation: {image_url}')
         vid_url = runway.create_cartel_video(image_url)
         logger.info(f'Runway vid url: {vid_url}')
 
-    logger.info("Generating cartel video for:", data.nombre1, data.nombre2, "Demo:", data.demo)
+    logger.info(f'Generating cartel video for: {data.nombre1}, {data.nombre2} Demo: {data.demo}')
     filename = f'vid_cartel_{data.id}'
 
     out_path = os.path.join(tempfile.gettempdir(), filename)
