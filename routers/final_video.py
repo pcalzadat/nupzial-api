@@ -7,7 +7,9 @@ import os
 import uuid
 import requests
 from urllib.parse import urlparse
+import logging
 
+logger = logging.getLogger("video_generation_app")
 router = APIRouter(prefix="/api")
 
 def _download_to_dir(url: str, dest_dir: str) -> str:
@@ -15,6 +17,7 @@ def _download_to_dir(url: str, dest_dir: str) -> str:
     Descarga la URL al directorio dest_dir y devuelve la ruta absoluta del fichero.
     Usa streaming y genera un nombre con uuid. Intenta inferir extensión desde la URL o el header.
     """
+    logger.info("Downloading URL to dir")
     parsed = urlparse(url)
     # intenta sacar extensión de la ruta
     ext = os.path.splitext(parsed.path)[1]
@@ -41,6 +44,7 @@ def send_power_automate(nombre1: str, nombre2: str, email1: str, email2: str, vi
     Devuelve el JSON de respuesta si existe, o el texto de la respuesta.
     Lanza RuntimeError si falla la llamada.
     """
+    logger.info("Calling Power Automate API")
     url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/"
             "powerautomate/automations/direct/workflows/d69522d29974438b8ffbfa614f2d904f/"
             "triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Lx2g4vD_XPZey5kGryFjJmgHBnp9yIGTfF58CGD05rg")
@@ -71,7 +75,7 @@ async def generate_final_video(req: VideoFinalRequest, vs: VideoService = Depend
     Devuelve path absoluto y URL pública usando get_media_url.
     """
     downloaded = []
-    print("Generando video final con entradas:", req.cartel_video, req.pareja_video)
+    logger.info(f'Generando video final con entradas: {req.cartel_video}, {req.pareja_video}')
     try:
         # Asegurar que el directorio temporal exista (VideoService ya crea temp_dir)
         temp_dir = vs.temp_dir

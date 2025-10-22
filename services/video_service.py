@@ -4,6 +4,9 @@ from moviepy import VideoFileClip, concatenate_videoclips, AudioFileClip
 from utils.blob_storage import upload_bytes_to_blob_storage
 from azure.storage.blob import ContentSettings
 from io import BytesIO
+import logging
+
+logger = logging.getLogger("video_generation_app")
 
 class VideoService:
     def __init__(self, static_videos_dir: str, overlay_path: str, audio_path: str, temp_dir: str):
@@ -55,9 +58,7 @@ class VideoService:
 
         print("Usando videos fijos:", v1, v2, v3)
 
-        print(v1, os.path.exists(v1))
-        print(v2, os.path.exists(v2))
-        print(v3, os.path.exists(v3))
+        logger.info(f'Usando videos fijos: %s {v1}, %s {v2}, %s {v3}')
 
         if not (os.path.exists(v1) and os.path.exists(v2)):
             raise FileNotFoundError("Uno o más videos fijos no se encontraron")
@@ -146,7 +147,7 @@ class VideoService:
                 generate_sas=True
             )
 
-            print("Video final subido a blob storage:", public_url)
+            logger.info(f'Video final subido a blob storage: {public_url}')
             
             return public_url
         finally:
