@@ -72,21 +72,6 @@ class VideoService:
 
             logger.info(f'cpli1 ok')
 
-            start_time_cartel = 0.5
-            duration_cartel = 1.32 
-            end_time_cartel = start_time_cartel + duration_cartel
-            clip_cartel = VideoFileClip(self._local(cartel));
-            subclip_cartel = clip_cartel.subclipped(start_time_cartel, end_time_cartel)   
-            clips.append(subclip_cartel)
-
-            logger.info(f'cpli cartel ok')
-
-
-            clip2 = VideoFileClip(v2);                
-            clips.append(clip2)
-
-            logger.info(f'cpli2 ok')
-
             #Clip pareja
             start_time_pareja = 0.5
             duration_pareja = 2.32 
@@ -96,6 +81,21 @@ class VideoService:
             clips.append(subclip_pareja)
 
             logger.info(f'cpli pareja ok')
+
+            clip2 = VideoFileClip(v2);                
+            clips.append(clip2)
+
+            logger.info(f'cpli2 ok')
+
+            #Clip cartel
+            start_time_cartel = 0.5
+            duration_cartel = 1.32 
+            end_time_cartel = start_time_cartel + duration_cartel
+            clip_cartel = VideoFileClip(self._local(cartel));
+            subclip_cartel = clip_cartel.subclipped(start_time_cartel, end_time_cartel)   
+            clips.append(subclip_cartel)
+
+            logger.info(f'cpli cartel ok')
 
 
             clip3 = VideoFileClip(v3); 
