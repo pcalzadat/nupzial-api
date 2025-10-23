@@ -45,9 +45,11 @@ def send_power_automate(nombre1: str, nombre2: str, email1: str, email2: str, vi
     Lanza RuntimeError si falla la llamada.
     """
     logger.info("Calling Power Automate API")
-    url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/"
+    '''url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/"
             "powerautomate/automations/direct/workflows/d69522d29974438b8ffbfa614f2d904f/"
-            "triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Lx2g4vD_XPZey5kGryFjJmgHBnp9yIGTfF58CGD05rg")
+            "triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Lx2g4vD_XPZey5kGryFjJmgHBnp9yIGTfF58CGD05rg")'''
+    
+    url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/39dd3fcd9b1e47898f8cda02ad7018bc/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZQSDYrJQErcysKUH75_cdSfkXI_nM1SxRUphaQeq9V4")
 
     payload = {
         "nombre1": nombre1,
@@ -94,7 +96,7 @@ async def generate_final_video(req: VideoFinalRequest, vs: VideoService = Depend
 
         send_power_automate(nombre1=req.nombre1, nombre2=req.nombre2, email1=req.email1, email2=req.email2, video_uri=out)
         logger.info(f'Video final generado en: {out}')
-        
+
         # Devolver ruta y URL pública (get_media_url debe aceptar path absoluto o convertir)
         return {"status": "success", "video_path": out}
     finally:
