@@ -7,6 +7,7 @@ from core.config import settings
 from routers import ai_generation, final_video, mail, media, whatsapp, image_generation
 from utils.files import init_temp_dir, cleanup_temp_files
 import os
+from core.job_queue import init_job_queue, shutdown as jobqueue_shutdown
 
 # === LOGGING CONFIGURATION ===
 LOG_DIR = "logs"
@@ -59,6 +60,11 @@ init_temp_dir(settings.TEMP_DIR)
 @app.on_event("startup")
 async def _startup():
     cleanup_temp_files()
+    init_job_queue(settings.MAX_CONCURRENT_JOBS)
+
+@app.on_event("shutdown")
+async def _shutdown_jobqueue():
+    jobqueue_shutdown()
 
 app.include_router(media.router)
 app.include_router(ai_generation.router)

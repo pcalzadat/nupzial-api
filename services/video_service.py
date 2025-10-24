@@ -5,6 +5,9 @@ from utils.blob_storage import upload_bytes_to_blob_storage
 from azure.storage.blob import ContentSettings
 from io import BytesIO
 import logging
+import requests
+from urllib.parse import urlparse
+from core.job_queue import submit
 
 logger = logging.getLogger("video_generation_app")
 
@@ -15,6 +18,55 @@ class VideoService:
         self.audio_path = audio_path
         self.temp_dir = temp_dir
         os.makedirs(self.temp_dir, exist_ok=True)
+
+    def enqueue_final(self, file_id: str, cartel_url: str, pareja_url: str, on_complete=None, on_error=None) -> str:
+        def _download_to_dir(url: str, dest_dir: str) -> str:
+            parsed = urlparse(url)
+            ext = os.path.splitext(parsed.path)[1]
+            tmp_name = f"input_{uuid.uuid4()}{ext or ''}"
+            out_path = os.path.join(dest_dir, tmp_name)
+            with requests.get(url, stream=True, timeout=30) as r:
+                r.raise_for_status()
+                if not ext:
+                    ct = r.headers.get("content-type", "")
+                    if "mp4" in ct or "mpeg" in ct:
+                        out_path += ".mp4"
+                with open(out_path, "wb") as f:
+                    for chunk in r.iter_content(chunk_size=1024 * 1024):
+                        if chunk:
+                            f.write(chunk)
+            return out_path
+
+        def _job():
+            downloaded = []
+            try:
+                cartel_local = _download_to_dir(cartel_url, self.temp_dir)
+                downloaded.append(cartel_local)
+                pareja_local = _download_to_dir(pareja_url, self.temp_dir)
+                downloaded.append(pareja_local)
+                out = self.compose_final(file_id, cartel_local, pareja_local)
+                if callable(on_complete):
+                    try:
+                        on_complete(out)
+                    except Exception:
+                        pass
+                return out
+            except Exception as e:
+                if callable(on_error):
+                    try:
+                        on_error(e)
+                    except Exception:
+                        pass
+                raise
+            finally:
+                for p in downloaded:
+                    try:
+                        if os.path.exists(p):
+                            os.remove(p)
+                    except:
+                        pass
+
+        return submit(_job)
 
     def _subclip(self, clip: VideoFileClip, seconds: float) -> VideoFileClip:
         return clip.subclipped(seconds)

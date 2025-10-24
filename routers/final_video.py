@@ -8,6 +8,7 @@ import uuid
 import requests
 from urllib.parse import urlparse
 import logging
+from core.job_queue import get_status
 
 logger = logging.getLogger("video_generation_app")
 router = APIRouter(prefix="/api")
@@ -71,38 +72,27 @@ def send_power_automate(nombre1: str, nombre2: str, email1: str, email2: str, vi
         raise RuntimeError(f"Error calling external API: {e}") from e
 
 
-@router.post("/generate_final_video")
+@router.post("/generate_final_video", status_code=202)
 async def generate_final_video(req: VideoFinalRequest, vs: VideoService = Depends(get_video_service)):
     """
     Recibe en req URLs públicas (blob). Descarga localmente y llama a VideoService.compose_final.
     Devuelve path absoluto y URL pública usando get_media_url.
     """
-    downloaded = []
     logger.info(f'Generando video final con entradas: {req.cartel_video}, {req.pareja_video}')
-    try:
-        # Asegurar que el directorio temporal exista (VideoService ya crea temp_dir)
-        temp_dir = vs.temp_dir
+    job_id = vs.enqueue_final(
+        req.id,
+        req.cartel_video,
+        req.pareja_video,
+        on_complete=lambda out: send_power_automate(
+            nombre1=req.nombre1,
+            nombre2=req.nombre2,
+            email1=req.email1,
+            email2=req.email2,
+            video_uri=out,
+        )
+    )
+    return {"status": "queued", "job_id": job_id}
 
-        # Cartel_video
-        cartel_local = _download_to_dir(req.cartel_video, temp_dir)
-        downloaded.append(cartel_local)
-
-        # Pareja_video
-        pareja_local = _download_to_dir(req.pareja_video, temp_dir)
-        downloaded.append(pareja_local)
-
-        # Llamada al servicio (pasa rutas locales)
-        out = vs.compose_final(req.id, cartel_local, pareja_local)
-
-        send_power_automate(nombre1=req.nombre1, nombre2=req.nombre2, email1=req.email1, email2=req.email2, video_uri=out)
-        logger.info(f'Video final generado en: {out}')
-
-        # Devolver ruta y URL pública (get_media_url debe aceptar path absoluto o convertir)
-        return {"status": "success", "video_path": out}
-    finally:
-        # limpiar ficheros de entrada descargados
-        for p in downloaded:
-            try:
-                if os.path.exists(p): os.remove(p)
-            except:
-                pass
+@router.get("/generate_final_video/{job_id}")
+async def generate_final_video_status(job_id: str):
+    return get_status(job_id)

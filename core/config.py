@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     STATIC_VIDEOS: str = "static/videos"
     STATIC_OVERLAY: str = "static/overlay/efectoluces-logo.mov"
     STATIC_AUDIO: str = "static/audio/audio.mp4"
+    MAX_CONCURRENT_JOBS: int = 1
 
     AZURE_STORAGE_CONNECTION_STRING: str | None = Field(None, env="AZURE_STORAGE_CONNECTION_STRING")
     AZURE_BLOB_CONTAINER: str = Field("public-data", env="AZURE_BLOB_CONTAINER")
