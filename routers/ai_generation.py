@@ -69,10 +69,34 @@ async def create_cartel_video(
         vid_url = runway.create_cartel_video(image_url)
         logger.info(f'Runway vid url: {vid_url}')
 
+
     logger.info(f'Generating cartel video for: {data.nombre1}, {data.nombre2} Demo: {data.demo}')
+    
+    # Download video from Runway
+    async with aiohttp.ClientSession() as session:
+        async with session.get(vid_url) as response:
+            if response.status != 200:
+                raise HTTPException(status_code=400, detail="Error downloading video from Runway")
+            video_content = await response.read()
+
     filename = f'vid_cartel_{data.id}'
 
-    out_path = os.path.join(tempfile.gettempdir(), filename)
+    # Upload to blob storage
+    file_id, public_url = upload_bytes_to_blob_storage(
+        video_content=video_content,
+        folder=data.id,
+        filename=filename,
+        content_settings=ContentSettings(
+            content_type='video/mp4'
+        )
+    )
+
+    return {
+        "status": "success",
+        "video_url": public_url
+    }    
+
+    #out_path = os.path.join(tempfile.gettempdir(), filename)
 
     '''# Download video from Runway
     async with aiohttp.ClientSession() as session:
@@ -82,7 +106,7 @@ async def create_cartel_video(
             video_content = await response.read()
 '''
     
-    try:
+    '''try:
         async with httpx.AsyncClient(timeout=httpx.Timeout(600.0), follow_redirects=True, headers={
             "User-Agent": "efor-appservice/1.0",
             "Accept": "*/*",
@@ -114,13 +138,15 @@ async def create_cartel_video(
             folder=data.id  # Optional: organize files in folders
         )
 
+        
+
         return {
             "status": "success",
             "video_url": public_url
         }
         #return out_path
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error downloading video from Runway: {e}")
+        raise HTTPException(status_code=400, detail=f"Error downloading video from Runway: {e}")'''
     '''
     # Upload to blob storage
     file_id, public_url = upload_bytes_to_blob_storage(

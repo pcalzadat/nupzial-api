@@ -66,32 +66,3 @@ async def save_image(file: UploadFile = File(...)):
     #send_power_automate(nombre1="N/A", nombre2="N/A", email1="pcalzada@integratecnologia.es", email2="pcalzada@integratecnologia.es", video_uri=public_url)
 
     return {"id": unique_id, "file_id": file_id, "image_url": public_url}
-
-
-def send_power_automate(nombre1: str, nombre2: str, email1: str, email2: str, video_uri: str, timeout: int = 30):
-    """
-    Llama a la API externa de Power Automate enviando los parámetros en el body JSON.
-    Devuelve el JSON de respuesta si existe, o el texto de la respuesta.
-    Lanza RuntimeError si falla la llamada.
-    """
-    url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/"
-            "powerautomate/automations/direct/workflows/d69522d29974438b8ffbfa614f2d904f/"
-            "triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Lx2g4vD_XPZey5kGryFjJmgHBnp9yIGTfF58CGD05rg")
-
-    payload = {
-        "nombre1": nombre1,
-        "nombre2": nombre2,
-        "email1": email1,
-        "email2": email2,
-        "videoURI": video_uri
-    }
-    headers = {"Content-Type": "application/json"}
-    try:
-        resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
-        resp.raise_for_status()
-        try:
-            return resp.json()
-        except ValueError:
-            return resp.text
-    except requests.RequestException as e:
-        raise RuntimeError(f"Error calling external API: {e}") from e
