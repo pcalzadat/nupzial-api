@@ -11,3 +11,415 @@
 2025-10-24 12:54:22 | INFO     | video_generation_app | <module>:42 | Logger configurado correctamente.
 2025-10-24 12:54:53 | INFO     | video_generation_app | root:78 | Logger configurado correctamente. | API Root accessed.
 2025-10-24 13:32:22 | INFO     | video_generation_app | <module>:41 | Logger configurado correctamente.
+2025-10-24 13:44:12 | INFO     | video_generation_app | <module>:41 | Logger configurado correctamente.
+2025-10-24 13:45:20 | INFO     | video_generation_app | save_image:37 | Saving image: ba728f54e40a4a40b8a8b4079893ec8e
+2025-10-24 13:45:20 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/img_pareja_ba728f54e40a4a40b8a8b4079893ec8e.jpg'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '186021'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'eb29c0d4-b0ce-11f0-86c4-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:45:20 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:45:20 GMT'
+    'ETag': '"0x8DE12F2CF888834"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'ee8a1250-b01e-0014-71db-443379000000'
+    'x-ms-client-request-id': 'eb29c0d4-b0ce-11f0-86c4-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:45:20 GMT'
+2025-10-24 13:45:20 | INFO     | video_generation_app | send_power_automate:127 | Calling Power Automate API
+2025-10-24 13:45:21 | INFO     | video_generation_app | send_power_automate:149 | Power Automate API call successful
+2025-10-24 13:45:22 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/img_cartel_ba728f54e40a4a40b8a8b4079893ec8e.jpg'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '1955049'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'ec9e9af6-b0ce-11f0-9845-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:45:23 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:45:23 GMT'
+    'ETag': '"0x8DE12F2D11839A0"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '34b48fe5-901e-0013-74db-445f1a000000'
+    'x-ms-client-request-id': 'ec9e9af6-b0ce-11f0-9845-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:45:22 GMT'
+2025-10-24 13:45:58 | INFO     | video_generation_app | create_cartel_video:61 | isDemo: True
+2025-10-24 13:45:58 | INFO     | video_generation_app | create_cartel_video:65 | Demo vid url: https://showroomblob.blob.core.windows.net/demo-data/cartel_vid_demo.mp4
+2025-10-24 13:45:58 | INFO     | video_generation_app | create_cartel_video:73 | Generating cartel video for: Laura, Lola Demo: True
+2025-10-24 13:45:59 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_cartel_ba728f54e40a4a40b8a8b4079893ec8e.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3064519'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '02b73925-b0cf-11f0-80c4-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:46:01 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:46:01 GMT'
+    'ETag': '"0x8DE12F2E7E1FA84"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'fedbb00c-001e-002e-75db-442901000000'
+    'x-ms-client-request-id': '02b73925-b0cf-11f0-80c4-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:46:01 GMT'
+2025-10-24 13:46:01 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_pareja_ba728f54e40a4a40b8a8b4079893ec8e.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3537050'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '03afe2d2-b0cf-11f0-90c3-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:46:02 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:46:02 GMT'
+    'ETag': '"0x8DE12F2E8AFBD4C"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'ee8a1afa-b01e-0014-14db-443379000000'
+    'x-ms-client-request-id': '03afe2d2-b0cf-11f0-90c3-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:46:02 GMT'
+2025-10-24 13:46:06 | INFO     | video_generation_app | generate_final_video:111 | Generando video final con entradas: https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_cartel_ba728f54e40a4a40b8a8b4079893ec8e.mp4, https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_pareja_ba728f54e40a4a40b8a8b4079893ec8e.mp4
+2025-10-24 13:46:06 | INFO     | video_generation_app | _download_to_dir:20 | Downloading URL to dir
+2025-10-24 13:46:06 | INFO     | video_generation_app | _download_to_dir:56 | Saving to path: temp_files\input_822fbb16-b130-4b54-87d0-6eb4c14a89eb.mp4
+2025-10-24 13:46:06 | INFO     | video_generation_app | _download_to_dir:20 | Downloading URL to dir
+2025-10-24 13:46:07 | INFO     | video_generation_app | _download_to_dir:56 | Saving to path: temp_files\input_2a25cc03-aafe-4f56-bfdb-0ff333853ef9.mp4
+2025-10-24 13:46:08 | INFO     | video_generation_app | compose_final:61 | Usando videos fijos: %s static/videos\nupzial1.mp4, %s static/videos\nupzial3.mp4, %s static/videos\nupzial4.mp4
+2025-10-24 13:46:08 | INFO     | video_generation_app | compose_final:69 | EMPEZAMOS!!
+2025-10-24 13:46:09 | INFO     | video_generation_app | compose_final:73 | cpli1 ok
+2025-10-24 13:46:10 | INFO     | video_generation_app | compose_final:83 | cpli pareja ok
+2025-10-24 13:46:11 | INFO     | video_generation_app | compose_final:88 | cpli2 ok
+2025-10-24 13:46:13 | INFO     | video_generation_app | compose_final:98 | cpli cartel ok
+2025-10-24 13:46:15 | INFO     | video_generation_app | compose_final:104 | clip3  ok
+2025-10-24 13:46:16 | INFO     | video_generation_app | compose_final:122 | llamo a concatenate_videoclips
+2025-10-24 13:46:16 | INFO     | video_generation_app | compose_final:126 | tenemos final_clip
+2025-10-24 13:46:16 | INFO     | video_generation_app | compose_final:136 | efectos ok
+2025-10-24 13:46:17 | INFO     | video_generation_app | compose_final:141 | audio ok
+2025-10-24 13:46:17 | INFO     | video_generation_app | compose_final:145 | guardo en temp
+2025-10-24 13:49:10 | INFO     | video_generation_app | compose_final:155 | temp ok
+2025-10-24 13:49:10 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_final_ba728f54e40a4a40b8a8b4079893ec8e.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '7135316'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '74751e3e-b0cf-11f0-9d68-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:49:11 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:49:11 GMT'
+    'ETag': '"0x8DE12F359025F78"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '76922b37-801e-0030-09dc-44c5d9000000'
+    'x-ms-client-request-id': '74751e3e-b0cf-11f0-9d68-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:49:10 GMT'
+2025-10-24 13:49:11 | INFO     | video_generation_app | compose_final:173 | Video final subido a blob storage: https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_final_ba728f54e40a4a40b8a8b4079893ec8e.mp4
+2025-10-24 13:49:11 | INFO     | video_generation_app | send_power_automate:77 | Calling Power Automate API
+2025-10-24 13:49:12 | INFO     | video_generation_app | send_power_automate:96 | Power Automate API call successful
+2025-10-24 13:49:12 | INFO     | video_generation_app | generate_final_video:128 | Video final generado en: https://showroomblob.blob.core.windows.net/public-data/ba728f54e40a4a40b8a8b4079893ec8e/vid_final_ba728f54e40a4a40b8a8b4079893ec8e.mp4
+2025-10-24 13:49:27 | INFO     | video_generation_app | save_image:37 | Saving image: 4afd5499cb0243c79bd362c67203cb22
+2025-10-24 13:49:27 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/img_pareja_4afd5499cb0243c79bd362c67203cb22.jpg'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '186021'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '7e79a4d2-b0cf-11f0-b47f-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:49:27 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:49:27 GMT'
+    'ETag': '"0x8DE12F362C38944"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '1961cd88-501e-001c-19dc-442976000000'
+    'x-ms-client-request-id': '7e79a4d2-b0cf-11f0-b47f-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:49:26 GMT'
+2025-10-24 13:49:30 | INFO     | video_generation_app | create_cartel_video:61 | isDemo: True
+2025-10-24 13:49:30 | INFO     | video_generation_app | create_cartel_video:65 | Demo vid url: https://showroomblob.blob.core.windows.net/demo-data/cartel_vid_demo.mp4
+2025-10-24 13:49:30 | INFO     | video_generation_app | create_cartel_video:73 | Generating cartel video for: Laura, Lola Demo: True
+2025-10-24 13:49:31 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_cartel_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3064519'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '80cb15f9-b0cf-11f0-91d0-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:49:31 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:49:31 GMT'
+    'ETag': '"0x8DE12F365358418"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '47f8b965-e01e-0009-50dc-443ec5000000'
+    'x-ms-client-request-id': '80cb15f9-b0cf-11f0-91d0-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:49:31 GMT'
+2025-10-24 13:49:32 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_pareja_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3537050'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '8196260a-b0cf-11f0-8daf-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:49:33 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:49:33 GMT'
+    'ETag': '"0x8DE12F3660B2F00"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '92afbd84-e01e-0019-0ddc-44fbad000000'
+    'x-ms-client-request-id': '8196260a-b0cf-11f0-8daf-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:49:33 GMT'
+2025-10-24 13:52:14 | INFO     | video_generation_app | create_cartel_video:61 | isDemo: True
+2025-10-24 13:52:14 | INFO     | video_generation_app | create_cartel_video:65 | Demo vid url: https://showroomblob.blob.core.windows.net/demo-data/cartel_vid_demo.mp4
+2025-10-24 13:52:14 | INFO     | video_generation_app | create_cartel_video:73 | Generating cartel video for: Laura, Lola Demo: True
+2025-10-24 13:52:15 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_pareja_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3537050'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'e2c0463f-b0cf-11f0-ab3e-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:52:16 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:52:16 GMT'
+    'ETag': '"0x8DE12F3C7355F98"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '65c4b3a2-201e-0006-57dc-4448a9000000'
+    'x-ms-client-request-id': 'e2c0463f-b0cf-11f0-ab3e-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:52:15 GMT'
+2025-10-24 13:52:18 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_cartel_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3064519'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'e44cbd37-b0cf-11f0-b0b0-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:52:18 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:52:18 GMT'
+    'ETag': '"0x8DE12F3C8B31AD8"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': 'e5a9f829-501e-0023-27dc-44e1d5000000'
+    'x-ms-client-request-id': 'e44cbd37-b0cf-11f0-b0b0-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:52:18 GMT'
+2025-10-24 13:53:47 | INFO     | video_generation_app | create_cartel_video:61 | isDemo: True
+2025-10-24 13:53:47 | INFO     | video_generation_app | create_cartel_video:65 | Demo vid url: https://showroomblob.blob.core.windows.net/demo-data/cartel_vid_demo.mp4
+2025-10-24 13:53:47 | INFO     | video_generation_app | create_cartel_video:73 | Generating cartel video for: Laura, Lola Demo: True
+2025-10-24 13:53:48 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_cartel_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3064519'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '19ed6554-b0d0-11f0-8021-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:53:48 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:53:48 GMT'
+    'ETag': '"0x8DE12F3FE738AC8"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '1f088220-301e-000a-26dc-44dfa1000000'
+    'x-ms-client-request-id': '19ed6554-b0d0-11f0-8021-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:53:48 GMT'
+2025-10-24 13:53:48 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_pareja_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '3537050'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '1a3ed407-b0d0-11f0-931d-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:53:49 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:53:49 GMT'
+    'ETag': '"0x8DE12F3FECC68B0"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '9419343f-b01e-0004-6edc-44f611000000'
+    'x-ms-client-request-id': '1a3ed407-b0d0-11f0-931d-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:53:49 GMT'
+2025-10-24 13:55:01 | INFO     | video_generation_app | generate_final_video:111 | Generando video final con entradas: https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_cartel_4afd5499cb0243c79bd362c67203cb22.mp4, https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_pareja_4afd5499cb0243c79bd362c67203cb22.mp4
+2025-10-24 13:55:01 | INFO     | video_generation_app | _download_to_dir:20 | Downloading URL to dir
+2025-10-24 13:55:01 | INFO     | video_generation_app | _download_to_dir:56 | Saving to path: temp_files\input_b2c561f6-bb33-42b7-ac31-4af896ef0937.mp4
+2025-10-24 13:55:02 | INFO     | video_generation_app | _download_to_dir:20 | Downloading URL to dir
+2025-10-24 13:55:02 | INFO     | video_generation_app | _download_to_dir:56 | Saving to path: temp_files\input_2e140e7b-2046-40b1-9a2d-59cd78444120.mp4
+2025-10-24 13:55:02 | INFO     | video_generation_app | compose_final:61 | Usando videos fijos: %s static/videos\nupzial1.mp4, %s static/videos\nupzial3.mp4, %s static/videos\nupzial4.mp4
+2025-10-24 13:55:02 | INFO     | video_generation_app | compose_final:69 | EMPEZAMOS!!
+2025-10-24 13:55:02 | INFO     | video_generation_app | compose_final:73 | cpli1 ok
+2025-10-24 13:55:03 | INFO     | video_generation_app | compose_final:83 | cpli pareja ok
+2025-10-24 13:55:04 | INFO     | video_generation_app | compose_final:88 | cpli2 ok
+2025-10-24 13:55:05 | INFO     | video_generation_app | compose_final:98 | cpli cartel ok
+2025-10-24 13:55:06 | INFO     | video_generation_app | compose_final:104 | clip3  ok
+2025-10-24 13:55:07 | INFO     | video_generation_app | compose_final:122 | llamo a concatenate_videoclips
+2025-10-24 13:55:07 | INFO     | video_generation_app | compose_final:126 | tenemos final_clip
+2025-10-24 13:55:07 | INFO     | video_generation_app | compose_final:136 | efectos ok
+2025-10-24 13:55:07 | INFO     | video_generation_app | compose_final:141 | audio ok
+2025-10-24 13:55:07 | INFO     | video_generation_app | compose_final:145 | guardo en temp
+2025-10-24 13:57:48 | INFO     | video_generation_app | compose_final:155 | temp ok
+2025-10-24 13:57:48 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_request:508 | Request URL: 'https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_final_4afd5499cb0243c79bd362c67203cb22.mp4'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '7135316'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-blob-content-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.27.0 Python/3.12.10 (Windows-10-10.0.19045-SP0)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'a92e70fc-b0d0-11f0-a7f4-c85ea9bc8da0'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2025-10-24 13:57:49 | INFO     | azure.core.pipeline.policies.http_logging_policy | on_response:554 | Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Fri, 24 Oct 2025 11:57:49 GMT'
+    'ETag': '"0x8DE12F48DD335AC"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '4dcb4a26-501e-000c-7cdd-44ec1e000000'
+    'x-ms-client-request-id': 'a92e70fc-b0d0-11f0-a7f4-c85ea9bc8da0'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Fri, 24 Oct 2025 11:57:48 GMT'
+2025-10-24 13:57:49 | INFO     | video_generation_app | compose_final:173 | Video final subido a blob storage: https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_final_4afd5499cb0243c79bd362c67203cb22.mp4
+2025-10-24 13:57:49 | INFO     | video_generation_app | send_power_automate:77 | Calling Power Automate API
+2025-10-24 13:57:50 | INFO     | video_generation_app | send_power_automate:96 | Power Automate API call successful
+2025-10-24 13:57:50 | INFO     | video_generation_app | generate_final_video:128 | Video final generado en: https://showroomblob.blob.core.windows.net/public-data/4afd5499cb0243c79bd362c67203cb22/vid_final_4afd5499cb0243c79bd362c67203cb22.mp4
