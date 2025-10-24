@@ -24,17 +24,47 @@ def _download_to_dir(url: str, dest_dir: str) -> str:
     tmp_name = f"input_{uuid.uuid4()}{ext or ''}"
     out_path = os.path.join(dest_dir, tmp_name)
 
-    with requests.get(url, stream=True, timeout=30) as r:
-        r.raise_for_status()
-        # si no hay ext, intenta del content-type
-        if not ext:
-            ct = r.headers.get("content-type", "")
-            if "mp4" in ct: out_path += ".mp4"
-            elif "mpeg" in ct: out_path += ".mp4"
-        with open(out_path, "wb") as f:
-            for chunk in r.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    f.write(chunk)
+    # Diccionario de mapeo de Content-Type a extensiones (más limpio y extensible)
+    MIME_EXTENSIONS = {
+        "video/mp4": ".mp4",
+        "video/mpeg": ".mp4", # Mantiene el mapeo original a .mp4
+        "image/jpeg": ".jpg",
+        "image/png": ".png",
+        "image/gif": ".gif",
+        "application/pdf": ".pdf",
+        # Añade otros tipos de archivos aquí si es necesario
+    }
+
+    try:
+        with requests.get(url, stream=True, timeout=30) as r:
+            r.raise_for_status() # Lanza un error para códigos de estado HTTP malos
+            
+            # 2. Si no hay extensión, intenta inferir del Content-Type
+            if not ext:
+                ct = r.headers.get("Content-Type", "").lower().split(';')[0].strip()
+                
+                inferred_ext = MIME_EXTENSIONS.get(ct)
+                
+                if inferred_ext:
+                    # Ajusta la ruta de salida con la extensión inferida
+                    out_path += inferred_ext
+                    logger.info(f"Inferred extension {inferred_ext} from Content-Type: {ct}")
+                else:
+                    logger.warning(f"Could not infer extension from Content-Type: {ct}. Using generic name.")
+
+            # 3. Escribir el contenido en el disco de forma eficiente
+            logger.info(f"Saving to path: {out_path}")
+            with open(out_path, "wb") as f:
+                for chunk in r.iter_content(chunk_size=1024 * 1024):
+                    # El chequeo `if chunk:` es redundante con iter_content, pero se mantiene por seguridad
+                    if chunk:
+                        f.write(chunk)
+                        
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error during download: {e}")
+        # En un sistema real, podrías querer manejar la limpieza del archivo parcial aquí
+        return "" # Devuelve cadena vacía o lanza la excepción
+
     return out_path
 
 

@@ -27,7 +27,7 @@ class RunwayService:
 
     def create_video_pareja(self, image_url: bytes) -> bytes:
         print("URL recibida con imagen:", image_url )
-        prompt_vid = ("a romantic couple walking hand in hand through a beautiful garden at sunset, soft lighting, cinematic style, 24fps, smooth camera movement")
+        prompt_vid = ("Subtle and affectionate movement between the subjects, maintaining the direct gaze towards the camera. They must share a gesture of affection without close physical contact, such as a slight head tilt, an exchange of glances, or a soft, warm smile. Strict preservation of the facial and bodily appearance of the people from the original image. Medium shot, soft lighting, cinematic.")
         return self.image_to_video(image_url, prompt_vid, ratio="1280:720")
 
 
