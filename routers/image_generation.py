@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-
+import requests
 import uuid
 import tempfile
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
@@ -8,7 +8,9 @@ from schemas.generation import EditCartelRequest
 from azure.storage.blob import BlobServiceClient, ContentSettings, generate_blob_sas, BlobSasPermissions
 from datetime import datetime, timedelta
 from utils.blob_storage import upload_to_blob_storage
+import logging
 
+logger = logging.getLogger("video_generation_app")
 router = APIRouter(prefix="/api")
 
 W, H = 1920, 1080
@@ -116,6 +118,40 @@ def render_save_the_date(
         img.convert("RGB").save(output_image, quality=100, subsampling=0)
 
 
+def send_power_automate(uid:str, nombre1: str, nombre2: str, email1: str, email2: str, telefono1: str, telefono2: str, fecha: str, timeout: int = 30):
+    """
+    Llama a la API externa de Power Automate enviando los parámetros en el body JSON.
+    Devuelve el JSON de respuesta si existe, o el texto de la respuesta.
+    Lanza RuntimeError si falla la llamada.
+    """
+    logger.info("Calling Power Automate API")
+    '''url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/"
+            "powerautomate/automations/direct/workflows/d69522d29974438b8ffbfa614f2d904f/"
+            "triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Lx2g4vD_XPZey5kGryFjJmgHBnp9yIGTfF58CGD05rg")'''
+    
+    url = ("https://default63722aa14f5d494d89d25ae5974aab.fc.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/df436e2923dc497f9457112c025d7e2f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qmQLlfLh2qjDHhR-hMtBN48aBSPICwkYVY6DY2xFvUw")
+
+    payload = {
+        "uid": uid,
+        "nombre1": nombre1,
+        "telefono1": telefono1,
+        "email1": email1,
+        "nombre2": nombre2,
+        "telefono2": telefono2,
+        "email2": email2,
+        "fecha": fecha
+    }
+    headers = {"Content-Type": "application/json"}
+    try:
+        resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
+        resp.raise_for_status()
+        try:
+            logger.info("Power Automate API call successful")
+        except ValueError:
+            return resp.text
+    except requests.RequestException as e:
+        raise RuntimeError(f"Error calling external API: {e}") from e
+    
 
 @router.post("/edit_cartel_image")
 async def edit_cartel_image(data: EditCartelRequest):
@@ -129,6 +165,17 @@ async def edit_cartel_image(data: EditCartelRequest):
     # output temporal
     out_name = f"img_cartel_{data.id}.jpg"
     out_path = os.path.join(tempfile.gettempdir(), out_name)
+
+    send_power_automate(
+        uid=data.id,
+        nombre1= data.nombre1, 
+        nombre2= data.nombre2, 
+        email1= data.email1, 
+        email2= data.email2, 
+        telefono1= data.telef1, 
+        telefono2= data.telef2, 
+        fecha= data.fecha
+    )
 
     try:
         # Llamada a la función de render
