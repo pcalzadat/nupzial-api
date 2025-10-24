@@ -1,6 +1,6 @@
 import os, uuid
 import numpy as np
-from moviepy import VideoFileClip, concatenate_videoclips, AudioFileClip
+from moviepy import VideoFileClip, concatenate_videoclips, AudioFileClip, ImageClip
 from utils.blob_storage import upload_bytes_to_blob_storage
 from azure.storage.blob import ContentSettings
 from io import BytesIO
@@ -51,7 +51,7 @@ class VideoService:
 
     # -----------------------
 
-    def compose_final(self, file_id:str, cartel: str, pareja: str) -> str:
+    def compose_final(self, file_id:str, cartel: str, pareja: str, isImage: bool) -> str:
         v1 = os.path.join(self.static_videos_dir, "nupzial1.mp4")
         v2 = os.path.join(self.static_videos_dir, "nupzial3.mp4")
         v3 = os.path.join(self.static_videos_dir, "nupzial4.mp4")
@@ -73,12 +73,20 @@ class VideoService:
             logger.info(f'cpli1 ok')
 
             #Clip pareja
-            start_time_pareja = 0.5
-            duration_pareja = 2.32 
-            end_time_pareja = start_time_pareja + duration_pareja
-            clip_pareja = VideoFileClip(self._local(pareja));
-            subclip_pareja = clip_pareja.subclipped(start_time_pareja, end_time_pareja)   
-            clips.append(subclip_pareja)
+            if isImage:
+                logger.info(f'Es imagen pareja')
+                nombre_archivo_imagen = pareja
+                duracion_imagen = 1.32
+                clip_imagen = ImageClip(nombre_archivo_imagen, duration=duracion_imagen)
+                clips.append(clip_imagen)
+            else:
+                logger.info(f'Es video pareja')
+                start_time_pareja = 0.5
+                duration_pareja = 2.32 
+                end_time_pareja = start_time_pareja + duration_pareja
+                clip_pareja = VideoFileClip(self._local(pareja));
+                subclip_pareja = clip_pareja.subclipped(start_time_pareja, end_time_pareja)   
+                clips.append(subclip_pareja)
 
             logger.info(f'cpli pareja ok')
 
@@ -94,7 +102,7 @@ class VideoService:
             clip_cartel = VideoFileClip(self._local(cartel));
             subclip_cartel = clip_cartel.subclipped(start_time_cartel, end_time_cartel)   
             clips.append(subclip_cartel)
-
+            
             logger.info(f'cpli cartel ok')
 
 

@@ -122,7 +122,7 @@ async def generate_final_video(req: VideoFinalRequest, vs: VideoService = Depend
         downloaded.append(pareja_local)
 
         # Llamada al servicio (pasa rutas locales)
-        out = vs.compose_final(req.id, cartel_local, pareja_local)
+        out = vs.compose_final(req.id, cartel_local, pareja_local, req.isImage)
 
         send_power_automate(nombre1=req.nombre1, nombre2=req.nombre2, email1=req.email1, email2=req.email2, video_uri=out)
         logger.info(f'Video final generado en: {out}')

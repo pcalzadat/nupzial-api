@@ -49,6 +49,7 @@ class VideoFinalRequest(BaseModel):
     email2: str
     cartel_video: str
     pareja_video: str
+    isImage: bool
 
 class EmailRequest(BaseModel):
     to_email: str
